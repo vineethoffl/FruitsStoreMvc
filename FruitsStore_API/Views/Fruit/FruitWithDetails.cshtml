@@ -1,0 +1,145 @@
+﻿@model FruitsStore_API.Models.FruitDetailsResponse
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        @@media (max-width: 767px) {
+        .nutri li {
+            text-align: left;
+            width: 100%;
+        }
+
+        .nutri span {
+            float: none;
+            display: block;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+        .nutri {
+            background-color: palegreen;
+        }
+
+            .nutri dd {
+                margin-bottom: 10px;
+            }
+
+            .nutri strong {
+                font-size: 1.2em;
+            }
+
+        .benefit-link {
+            color: #3498db;
+            text-decoration: underline;
+        }
+        .angle-bracket-button {
+            position: relative;
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: #fff;
+            font-size: 12px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+            .angle-bracket-button::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 100%;
+                width: 0;
+                height: 0;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 10px solid #3498db;
+    </style>
+</head>
+<body>
+    <div>        
+        <a href="@Url.Action("FruitsDetails")" class="angle-bracket-button ">back</a>
+        <dl class="dl-horizontal">
+            <dd>
+                <strong>@Html.DisplayFor(model => Model.FruitsData.First().name)</strong>
+            </dd>
+            <div class="fruit-image text-center">
+                @{
+                    string imageName = Model.FruitsData.First().name;
+                    string imagePath = $"~/Assets/{imageName}.jpg";
+                    string imageUrl = File.Exists(Server.MapPath(imagePath))
+                        ? Url.Content(imagePath)
+                        : Url.Content("~/Assets/default.jpg");
+                }
+                <img src="@imageUrl" alt="@imageName" class="center" style="max-width: 200px; max-height: 200px;" />
+            </div>
+            <dd>
+                @if (Model.MappedDetails != null)
+                {
+                    @Html.DisplayFor(model => model.MappedDetails.Description)
+                }
+            </dd>
+            <div class="nutri">
+                <dd>
+                    <strong>Nutrients</strong>
+                </dd>
+                <ul class="list-unstyled">
+                    @if (Model.FruitsData.First().nutritions != null)
+                    {
+                        <li>
+                            <span style="float: left; width: 300px;">@Html.DisplayNameFor(model => model.FruitsData.First().nutritions.carbohydrates):</span>
+                            <span style="display: inline-block; text-align: center; width: 50px;">:</span>
+                            <span style="float: right; width: 20px;">@Html.DisplayFor(model => model.FruitsData.First().nutritions.carbohydrates)</span>
+                        </li>
+                        <li>
+                            <span style="float: left; width: 300px;">@Html.DisplayNameFor(model => model.FruitsData.First().nutritions.protein):</span>
+                            <span style="display: inline-block; text-align: center; width: 50px;">:</span>
+                            <span style="float: right; width: 20px;">@Html.DisplayFor(model => model.FruitsData.First().nutritions.protein)</span>
+                        </li>
+                        <li>
+                            <span style="float: left; width: 300px;">@Html.DisplayNameFor(model => model.FruitsData.First().nutritions.fat):</span>
+                            <span style="display: inline-block; text-align: center; width: 50px;">:</span>
+                            <span style="float: right; width: 20px;">@Html.DisplayFor(model => model.FruitsData.First().nutritions.fat)</span>
+                        </li>
+                        <li>
+                            <span style="float: left; width: 300px;">@Html.DisplayNameFor(model => model.FruitsData.First().nutritions.calories):</span>
+                            <span style="display: inline-block; text-align: center; width: 50px;">:</span>
+                            <span style="float: right; width: 20px;">@Html.DisplayFor(model => model.FruitsData.First().nutritions.calories)</span>
+                        </li>
+                        <li>
+                            <span style="float: left; width: 300px;">@Html.DisplayNameFor(model => model.FruitsData.First().nutritions.sugar):</span>
+                            <span style="display: inline-block; text-align: center; width: 50px;">:</span>
+                            <span style="float: right; width: 20px;">@Html.DisplayFor(model => model.FruitsData.First().nutritions.sugar)</span>
+                        </li>                        
+                    }
+                </ul>
+            </div>
+            <dt>
+                Benefits
+            </dt>
+            <dd>
+                <ul class="list-unstyled benefits-list">
+                    @{
+                        if (Model.MappedDetails != null)
+                        {
+                            var benefits = Model.MappedDetails.Benefits.Split('|');
+                            for (int i = 0; i < benefits.Length; i++)
+                            {
+                                <li style="color:dodgerblue">@(i + 1). <a href="#" class="benefit-link">@benefits[i]</a></li>
+                            }
+                        }
+                    }
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</body>
+</html>

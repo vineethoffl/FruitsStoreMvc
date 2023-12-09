@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 5,
+    "Description": "The avocado is a medium-sized, evergreen tree...",
+    "Benefits": "Healthy for the heart|Great for Vision|May help prevent osteoporosis|Components may prevent cancer|Supporting fetal health|Reducing depression risk|Improving digestion"
+  },
+  {
+    "Id": 3,
+    "Description": "Apricots (Prunus armeniaca) are small, pitted fruit...",
+    "Benefits": "May protect your liver|Very nutritious and low in calories|High in antioxidants"
+  },
+  {
+    "Id": 1,
+    "Description": "A banana is a curved, yellow fruit with a thick skin and soft sweet flesh...",
+    "Benefits": "May improve digestion|Helps to improve heart health|Helps to build lean muscles|Supports bone health"
+  },
+  {
+    "Id": 52,
+    "Description": "The Persimmon is one of the pome (fleshy) fruits...",
+    "Benefits": "Protects Your Heart|Boosts Brain Health|May Help You Lose Weight|Lowers Risk of Type 2 Diabetes|Fights Cancer"
+  }
+]
